@@ -76,7 +76,7 @@
 																out.print("Student Enrolled");
 														}%></td>
 														</tr>
-														<tr><td class="formbottomtd"> <a href="home.jsp">Home Page</a></td></tr>
+														<tr><td class="formbottomtd"> <a href="/StudentRegistration">Home Page</a></td></tr>
 						</table>
 					</center>
 				</div>					

@@ -1,21 +1,21 @@
 <html>
 <head>
 <title>home page</title>
-<link rel="stylesheet" type="text/css" href="../css/home.css">
+<link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 <body>
 	<div class="headerdivision">
 			<table class="headertable">
 				<tr>
-					<td class="logo"><img src="../images/SchoolLogo.png" height=29px;"></td>
-					<td><a href="../jsp/students.jsp">Enroll New Student</a></td>
-					<td><a href="../jsp/subjects.jsp">Opt For Subjects</a></td>
-					<td><a href="../MarksServlet?action=LoadStudents">View Marks</a></td>
+					<td class="logo"><img src="images/SchoolLogo.png" height=29px;"></td>
+					<td><a href="jsp/students.jsp">Enroll New Student</a></td>
+					<td><a href="jsp/subjects.jsp">Opt For Subjects</a></td>
+					<td><a href="MarksServlet?action=LoadStudents">View Marks</a></td>
 				</tr>
 			</table>
 	</div>
 	<div class="bodydivision">
-		<img src="../images/schoolimage.png" width=100%;>
+		<img src="images/schoolimage.png" width=100%;>
 		<div class="welcomemessage"><p>Welcome to Infor School</p>
 		</div>
 	</div>

@@ -39,7 +39,7 @@
 							<td></td>
 							<td><input type="submit" value="Opt" class="insertbutton"></td>
 					</tr>
-					<tr><td></td><td></td><td class="formbottomtd"> <a href="home.jsp">Home Page</a></td></tr>
+					<tr><td></td><td></td><td class="formbottomtd"> <a href="/StudentRegistration">Home Page</a></td></tr>
 				</table>
 		</center>
 		</div>

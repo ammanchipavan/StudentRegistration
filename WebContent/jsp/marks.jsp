@@ -118,7 +118,7 @@
 													}
 													%>
 													<table>
-														<tr><td><h6><a href="home.jsp">Home Page</a></h6></td></tr>
+														<tr><td><h6><a href="/StudentRegistration">Home Page</a></h6></td></tr>
 													</table>		
 					</center>
 				</div>
