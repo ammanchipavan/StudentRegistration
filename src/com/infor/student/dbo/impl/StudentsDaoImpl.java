@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import com.infor.student.util.CloseDbConnection2;
 import com.infor.student.util.GetDbConnection2;
+import com.infor.student.pojo.Marks;
 import com.infor.student.pojo.Student;
 
 
@@ -70,7 +71,7 @@ public class StudentsDaoImpl {
 			preparedStatement.setDate(2, new java.sql.Date(milliseconds));
 			preparedStatement.setString(3, studentsobject.getEmail());
 			rows = preparedStatement.executeUpdate();
-		} catch (SQLException e) {
+		}catch (SQLException e) {
 			logger.info("SQL Exception raised");
 		} finally {
 			try {
@@ -207,6 +208,64 @@ public class StudentsDaoImpl {
 		}
 		return marks;
 
+	}
+
+	public int updateMarks(Long id, String subname , Long marks) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String query = "update marks set subjectmarks=? where id=? and subname=?";
+		int rows = 0;
+		try {
+			connection = GetDbConnection2.getConnection();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setLong(1,marks);
+			preparedStatement.setLong(2,id);
+			preparedStatement.setString(3,subname);
+			rows = preparedStatement.executeUpdate();
+			System.out.println(rows + " " + "row(s) inserted into students");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				CloseDbConnection2
+						.closeConnection(connection, preparedStatement);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return rows;
+	}
+
+	public List<Marks> getMarksById(Long id) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<Marks> list = new ArrayList<Marks>();
+		String query="select id,subname,subjectmarks from Marks where id=?";
+		try {
+			connection = GetDbConnection2.getConnection();
+			
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setLong(1,id);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				list.add(new Marks(resultSet.getLong(1), resultSet
+						.getString(2),resultSet.getLong(3)));
+				
+			}
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				CloseDbConnection2
+						.closeConnection(connection, preparedStatement);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 	
 

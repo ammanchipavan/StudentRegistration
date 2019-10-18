@@ -13,8 +13,8 @@
 						<tr>
 							<td class="logo"><img src="images/SchoolLogo.png" height=29px;"></td>
 							<td><a href="jsp/students.jsp">Enroll New Student</a></td>
-							<td><a href="jsp/subjects.jsp">Opt For Subjects</a></td>
-							<td><a href="MarksServlet?action=LoadStudents">View Marks</a></td>
+							<td><a href="SubjectsServlet?action=getmarks">Update Marks</a></td>
+							<td><a href="MarksServlet?action=LoadStudents">View Grades</a></td>
 						</tr>
 					</table>
 			</div>

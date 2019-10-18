@@ -61,7 +61,7 @@ public class StudentsServlet extends HttpServlet {
 				final int rows = studentsdaoimpl.enrollNewStudent(new Student(req.getParameter("name"),
 						sdf.parse(req.getParameter("dob")), req.getParameter("email")));
 				req.setAttribute("rowsinserted", (Object) rows);
-				final RequestDispatcher dispatch = req.getRequestDispatcher("students.jsp");
+				final RequestDispatcher dispatch = req.getRequestDispatcher("jsp/students.jsp");
 				dispatch.forward((ServletRequest) req, (ServletResponse) resp);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
