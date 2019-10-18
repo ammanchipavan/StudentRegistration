@@ -75,9 +75,9 @@ public class MarksServlet extends HttpServlet
         MarksServlet.logger.info(action);
         if (action.equals("LoadStudents")) {
             final HttpSession session = req.getSession();
-            final RequestDispatcher requestdispatcher = req.getRequestDispatcher("marks.jsp");
+            final RequestDispatcher requestdispatcher = req.getRequestDispatcher("jsp/marks.jsp");
             final List<Student> Studentlist = (List<Student>) this.studentdaoimpl.getAllStudents();
-            session.setAttribute("Studentlist", (Object)Studentlist);
+            session.setAttribute("Studentlist", Studentlist);
             requestdispatcher.forward((ServletRequest)req, (ServletResponse)resp);
         }
     }
@@ -89,7 +89,7 @@ public class MarksServlet extends HttpServlet
         int numberofsubjects = 0;
         String grade = "";
         if (action.equals("viewmarks")) {
-            final RequestDispatcher requestdispatcher = req.getRequestDispatcher("marks.jsp");
+            final RequestDispatcher requestdispatcher = req.getRequestDispatcher("jsp/marks.jsp");
             final long id = Long.parseLong(req.getParameter("id"));
             MarksServlet.logger.info(String.valueOf(id));
             final List<String> subjectslist = (List<String>)this.studentdaoimpl.getSubjectsbyId(id);
@@ -100,38 +100,28 @@ public class MarksServlet extends HttpServlet
                 subjectwisemarks.put(subjectname, this.studentdaoimpl.getMarks(subjectname, id));
                 ++numberofsubjects;
             }
-            for (final String string : subjectwisemarks.keySet()) {
-                total += subjectwisemarks.get(string);
-            }
-            try {
-                percentage = total / (double)numberofsubjects;
-                if (percentage >= 75.0) {
-                    grade = "A";
-                }
-                else if (percentage < 75.0 && percentage >= 50.0) {
-                    grade = "B";
-                }
-                else if (percentage < 50.0 && percentage >= 40.0) {
-                    grade = "C";
-                }
-                else {
-                    grade = "FAIL";
-                }
-            }
-            catch (ArithmeticException ae) {
-                req.setAttribute("errormessage", (Object)"Selected student did not opt for any subjects");
-                return;
-            }
-            finally {
-                req.setAttribute("subjectwisemarks", (Object)subjectwisemarks);
-                req.setAttribute("total", (Object)total);
-                req.setAttribute("grade", (Object)grade);
-                requestdispatcher.forward((ServletRequest)req, (ServletResponse)resp);
-            }
-            req.setAttribute("subjectwisemarks", (Object)subjectwisemarks);
-            req.setAttribute("total", (Object)total);
-            req.setAttribute("grade", (Object)grade);
-            requestdispatcher.forward((ServletRequest)req, (ServletResponse)resp);
-        }
+            for (String string : subjectwisemarks.keySet()) {
+				total = total + subjectwisemarks.get(string);
+			}
+			
+				logger.info(String.valueOf(numberofsubjects));
+				percentage=((double)total/(numberofsubjects));
+				if(percentage>=75.0){
+					grade="A";
+				}else if(percentage<75.0 && percentage>=50.0)
+				{
+					grade="B";
+				}else if(percentage<50.0 && percentage>=40.0)
+				{
+					grade="C";
+				}else
+				{
+					grade="FAIL";
+				}
+				req.setAttribute("subjectwisemarks", subjectwisemarks);
+				req.setAttribute("total", total);
+				req.setAttribute("grade",grade);
+				req.setAttribute("numberofsubjects",numberofsubjects);
+				requestdispatcher.forward(req, resp);        }
     }
 }

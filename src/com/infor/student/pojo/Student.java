@@ -1,5 +1,6 @@
 package com.infor.student.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -38,7 +39,7 @@ import java.util.Date;
  *---End Copyright Notice---
 
  */
-public class Student {
+public class Student implements Serializable {
 
 	long id;
 	String name;

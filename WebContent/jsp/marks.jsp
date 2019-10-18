@@ -5,21 +5,21 @@
 		
 	<head>
 		<title>marks data</title>
-		<link rel="stylesheet" type="text/css" href="../css/marks.css">
+		<link rel="stylesheet" type="text/css" href="css/marks.css">
 	</head>
 	<body>
 			<div class="headerdivision">
 					<table class="headertable">
 						<tr>
-							<td class="logo"><img src="../images/SchoolLogo.png" height=29px;"></td>
-							<td><a href="../jsp/students.jsp">Enroll New Student</a></td>
-							<td><a href="../jsp/subjects.jsp">Opt For Subjects</a></td>
-							<td><a href="../MarksServlet?action=LoadStudents">View Marks</a></td>
+							<td class="logo"><img src="images/SchoolLogo.png" height=29px;"></td>
+							<td><a href="jsp/students.jsp">Enroll New Student</a></td>
+							<td><a href="jsp/subjects.jsp">Opt For Subjects</a></td>
+							<td><a href="MarksServlet?action=LoadStudents">View Marks</a></td>
 						</tr>
 					</table>
 			</div>
 			<div class="bodydivision">
-					<img src="../images/schoolimage.png" width=100%;>
+					<img src="images/schoolimage.png" width=100%;>
 						<div class="middledivision">
 								<p>View Marks</p>
 						</div>
@@ -32,7 +32,8 @@
 											<td>
 											<select name="id"  class="optionbox">
 												<%
-													Object obj = session.getAttribute("studentslist");
+													Object obj = session.getAttribute("Studentlist");
+												System.out.println(obj);
 													if(obj!=null)
 													{
 														List<Student> studentsList = (List<Student>)obj;
@@ -81,16 +82,16 @@
 														<%
 														Object Total=request.getAttribute("total");
 														Object Grade=request.getAttribute("grade");
-														Object Errormessage=request.getAttribute("errormessage");
-														if(Total!=null && Grade!=null)
+														Object NumberOfSubjects=request.getAttribute("numberofsubjects");
+														if(Total!=null && Grade!=null&&NumberOfSubjects!=null)
 														{
-															if((li.isEmpty()))
+															Integer numberofsubjects =(Integer)NumberOfSubjects;
+															if(numberofsubjects.intValue()==0)
 															{
-																String errormessage=(String)Errormessage;
 																%>
 																<tr>
 																	<td></td>
-																	<td class="outputtd"><% out.print(errormessage);%></td>
+																	<td class="outputtd"><% out.print("Selected student did not opt for any subjects");%></td>
 																</tr>
 
 															<%} else
