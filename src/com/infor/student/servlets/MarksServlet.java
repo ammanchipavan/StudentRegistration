@@ -72,7 +72,7 @@ public class MarksServlet extends HttpServlet
     
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         final String action = req.getParameter("action");
-        MarksServlet.logger.info(action);
+        MarksServlet.logger.info("Action:" + action);
         if (action.equals("LoadStudents")) {
             final HttpSession session = req.getSession();
             final RequestDispatcher requestdispatcher = req.getRequestDispatcher("jsp/marks.jsp");
