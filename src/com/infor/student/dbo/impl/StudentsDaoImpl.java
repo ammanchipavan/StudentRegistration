@@ -57,20 +57,27 @@ public class StudentsDaoImpl {
 	 * @param studentsobject
 	 * @return student no
 	 */
-	public int enrollNewStudent(Student studentsobject) {
+	public  long enrollNewStudent(Student studentsobject) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String query = "insert into students values(student_id.nextval,?,?,?)";
-		int rows = 0;
+		long studentId = 0;
+		int rows=0;
 		long milliseconds = 0;
+		ResultSet resultSet=null;
 		try {
 			connection = GetDbConnection2.getConnection();
-			preparedStatement = connection.prepareStatement(query);
+			preparedStatement =	connection.prepareStatement(query,new String[]{"id"});
 			preparedStatement.setString(1, studentsobject.getName());
 			milliseconds = studentsobject.getDob().getTime();
 			preparedStatement.setDate(2, new java.sql.Date(milliseconds));
 			preparedStatement.setString(3, studentsobject.getEmail());
 			rows = preparedStatement.executeUpdate();
+			resultSet=preparedStatement.getGeneratedKeys();
+			while(resultSet.next())
+			{
+				studentId=resultSet.getLong(1);
+			}
 		}catch (SQLException e) {
 			logger.info("SQL Exception raised");
 		} finally {
@@ -81,7 +88,7 @@ public class StudentsDaoImpl {
 				logger.info("SQL Exception raised");
 			}
 		}
-		return rows;
+		return studentId;
 	}
 
 	/**

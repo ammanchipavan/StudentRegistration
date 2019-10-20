@@ -7,6 +7,13 @@
 		<title>marks data</title>
 		<link rel="stylesheet" type="text/css" href="css/marks.css">
 	</head>
+	<%
+		Object validation =session.getAttribute("validationFlag");
+		if(validation==null)
+		{
+			response.sendRedirect("jsp/login.jsp");
+		}
+		%>
 	<body>
 			<div class="headerdivision">
 					<table class="headertable">
@@ -15,6 +22,7 @@
 							<td><a href="jsp/students.jsp">Enroll New Student</a></td>
 							<td><a href="SubjectsServlet?action=getmarks">Update Marks</a></td>
 							<td><a href="MarksServlet?action=LoadStudents">View Grades</a></td>
+							<td><a href="http://localhost:8080/StudentRegistration/LoginServlet?action=Logout">Log Out</a></td>
 						</tr>
 					</table>
 			</div>
@@ -32,12 +40,12 @@
 											<td>
 											<select name="id"  class="optionbox">
 												<%
-													Object obj = session.getAttribute("Studentlist");
-												System.out.println(obj);
-													if(obj!=null)
+												Object studentsList = session.getAttribute("Studentlist");
+												
+													if(studentsList!=null)
 													{
-														List<Student> studentsList = (List<Student>)obj;
-														for(Student s:studentsList)
+														List<Student> studentsListCast = (List<Student>)studentsList;
+														for(Student s:studentsListCast)
 														{
 															%>
 															<option value="<% out.print(s.getId());%>"><% out.print(s.getId());%></option>
@@ -51,6 +59,24 @@
 										</tr>
 										
 									</table>
+									
+								<table>
+								<tr><th>Student Id</th><th></th><th>Student Name</th></tr>
+								<%
+													
+												
+													if(studentsList!=null)
+													{
+														List<Student> studentsListCasted = (List<Student>)studentsList;
+														for(Student s:studentsListCasted)
+														{
+															%>
+															<tr><td><% out.print(s.getId());%></td><td></td><td><% out.print(s.getName());%></td></tr>
+															<%
+														}
+													}
+								%>
+								</table>
 								</form>	
 								<%
 													Object obj1 = request.getAttribute("subjectslist");
@@ -119,7 +145,7 @@
 													}
 													%>
 													<table>
-														<tr><td><h6><a href="/StudentRegistration">Home Page</a></h6></td></tr>
+														<tr><td><h6><a href="http://localhost:8080/StudentRegistration/jsp/home.jsp">Home Page</a></h6></td></tr>
 													</table>		
 					</center>
 				</div>

@@ -9,13 +9,21 @@
 <script type="text/javascript" src="js/validations.js"></script>
 </head>
 <body>
+<%
+		Object validation =session.getAttribute("validationFlag");
+		if(validation==null)
+		{
+			response.sendRedirect("jsp/login.jsp");
+		}
+		%>
 	<div class="headerdivision">
 			<table class="headertable">
 				<tr>
 					<td class="logo"><img src="images/SchoolLogo.png" height=29px;></td>
 					<td><a href="jsp/students.jsp">Enroll New Student</a></td>
-					<td><a href="#">Update Marks</a></td>
+					<td><a href="SubjectsServlet?action=getmarks">Update Marks</a></td>
 					<td><a href="MarksServlet?action=LoadStudents">View Grades</a></td>
+					<td><a href="http://localhost:8080/StudentRegistration/LoginServlet?action=Logout">Log Out</a></td>
 				</tr>
 			</table>
 	</div>
@@ -53,6 +61,7 @@
 										</tr>
 									</table>
 		</form>									<form method="POST" action="SubjectsServlet?action=updatemarks">
+												<table>
 												<%
 												
 													Object SubjectsList = request.getAttribute("subjectslist");
@@ -62,8 +71,6 @@
 														List<String> subjectslist = (List<String>)SubjectsList;
 														HashMap<String,Integer>  subjectwisemarks=(HashMap<String,Integer>)SubjectWiseMarks;
 														%>
-													
-													<table>
 													<%
 														for(String subjects:subjectslist)
 														{
@@ -75,7 +82,7 @@
 													<%
 														}
 														%>
-														</tr>
+														
 														<tr>
 														<td></td>
 														</tr>
@@ -86,7 +93,9 @@
 														</td>
 														<td><input type="submit" value="Update Marks" class="buttons"></td>
 														</tr>
-														<tr>
+																												<%
+														}%>
+													
 														<%
 														Object rowsinserted=request.getAttribute("rowsinserted");
 														Object updatedlist=request.getAttribute("updatedlist");
@@ -94,32 +103,26 @@
 														{
 															Integer x=(Integer)rowsinserted;
 															%>
-															<td class="outputtd"><% out.print(x+" rows inserted");%></td>
-															<tr>
+															<tr><td></td><td class="outputtd"><% out.print(x+" record(s) updated");%></td></tr>
+															<tr><th class="tableheadings">Id</th><th class="tableheadings">subjects</th><th class="tableheadings">marks</th></tr>
 															<%
 															List<Marks> updatedList = (List<Marks>)updatedlist;
+															
 															for(Marks marks:updatedList)
 															{
 															%>
+																<tr>
+																
 																<td class="outputtd"><%out.print(marks.getId());%></td>
 																<td class="outputtd"><%out.print(marks.getSubname());%></td>
 																<td class="outputtd"><%out.print(marks.getSubjectMarks());%></td>
-																
-															</tr>
-														<%
-														}
-														}
-														%>
-														</tr>
-													<%
-														}
-													%>
-														
+																</tr>
+																<%}} %>
 													</table>
 												</form>
 																										
 					<table>
-														<tr><td><h6><a href="/StudentRegistration">Home Page</a></h6></td></tr>
+														<tr><td><h6><a href="http://localhost:8080/StudentRegistration/jsp/home.jsp">Home Page</a></h6></td></tr>
 													</table>									
 			</center>
 		</div>

@@ -6,6 +6,13 @@
 		<script type="text/javascript" src="http://localhost:8080/StudentRegistration/js/validations.js"></script>
 	</head>
 	<body>
+	<%
+		Object validation =session.getAttribute("validationFlag");
+		if(validation==null)
+		{
+			response.sendRedirect("jsp/login.jsp");
+		}
+		%>
 			<div class="headerdivision">
 					<table class="headertable">
 						<tr>
@@ -13,6 +20,7 @@
 							<td><a href="../jsp/students.jsp">Enroll New Student</a></td>
 							<td><a href="../SubjectsServlet?action=getmarks">Update Marks</a></td>
 							<td><a href="../MarksServlet?action=LoadStudents">View Grades</a></td>
+							<td><a href="http://localhost:8080/StudentRegistration/LoginServlet?action=Logout">Log Out</a></td>
 						</tr>
 					</table>
 			</div>
@@ -23,7 +31,7 @@
 						</div>
 						<div class="formdivision">
 								<center>
-										<form method="POST" action="../StudentsServlet?action=enrollnewstudent" name="enrollmentform">
+										<form method="POST" action="http://localhost:8080/StudentRegistration/StudentsServlet?action=enrollnewstudent" name="enrollmentform">
 											<center>
 												<table>
 												<tr>
@@ -44,7 +52,7 @@
 												</tr>
 												
 												<tr>
-													<td  class="formtd">Subjects to Opt:</td>													<td  class="formtd"><input type="checkbox" name="sub3"  value="chemistry" class="checkbox">Chemistry</td>
+													<td  class="formtd">Subjects to Opt:</td><td  class="formtd"><input type="checkbox" name="sub3"  value="chemistry" class="checkbox">Chemistry</td>
 													<td  class="formtd"><input type="checkbox" name="sub4"  value="biology" class="checkbox">Biology</td>
 												</tr>
 												<tr>
@@ -71,13 +79,14 @@
 														%>
 														<tr>
 															<td><%
-																out.print(y.intValue());
+															out.print(" 1 Student with");
+																
 															%></td>
 															<td><%
-																out.print("Student Enrolled");
+															out.print(y.intValue()+" Subjects Enrolled");
 														}%></td>
 														</tr>
-														<tr><td class="formbottomtd"> <a href="/StudentRegistration">Home Page</a></td></tr>
+														<tr><td class="formbottomtd"> <a href="http://localhost:8080/StudentRegistration/jsp/home.jsp">Home Page</a></td></tr>
 						</table>
 						
 					</center>

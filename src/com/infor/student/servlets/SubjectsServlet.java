@@ -60,6 +60,7 @@ public class SubjectsServlet extends HttpServlet {
 		List<String> subjectslist=null;;
 		RequestDispatcher requestdispatcher=null;
 		List<Marks> updatedlist=null;
+		
 		if (action.equals("viewsubjects")) {
 			long id = Long.parseLong(req.getParameter("id"));
 			HttpSession session=req.getSession();
@@ -89,7 +90,7 @@ public class SubjectsServlet extends HttpServlet {
 			RequestDispatcher dispatch;
 			for (String string : subjectslist) {
 				Long marks = Long.parseLong(req.getParameter(string));
-				rows = studentsdaoimpl.updateMarks((sid), string,
+				rows = rows + studentsdaoimpl.updateMarks((sid), string,
 						(marks));
 			}
 			
