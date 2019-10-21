@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 import com.infor.student.util.GetDbConnection2;
 
@@ -29,12 +30,9 @@ public class LoginServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger;
-
-	static {
-		logger = Logger.getLogger("global");
-	}
-
+	/** The logger. */
+	protected static final Logger LOG = Logger.getLogger(LoginServlet.class);
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -44,9 +42,11 @@ public class LoginServlet extends HttpServlet {
 		String dbPassword = "";
 		boolean validationFlag = false;
 		RequestDispatcher dispatcher =null; 
-		
+		LOG.info("Invoking Login Servlet doPost");
 
 		if (action.equals("validateLogin")) {
+			
+			LOG.info("Invoking Login Servlet validateLogin Action");
 			String query = "select password from users where username=?";
 			try (Connection connection = GetDbConnection2.getConnection();
 					PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -71,10 +71,11 @@ public class LoginServlet extends HttpServlet {
 				}
 			} catch (SQLException e) {
 
-				logger.info("SQL Exception raised in HomePage");
+				LOG.error("SQL Exception raised in HomePage" + e.getMessage());
 				
 			}
 		} else if (action.equals("newuser")) {
+			LOG.info("Invoking Login Servlet newUser Action");
 			int rows=0;
 			String query = "insert into users values(?,?)";
 			try (Connection connection = GetDbConnection2.getConnection();
@@ -90,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 
 				req.setAttribute("errormessage"," Username is already taken !");
 				
-				logger.info("SQL Exception raised in login user registration page");
+				LOG.error("SQL Exception raised in login user registration page" +  e.getMessage());
 				dispatcher=req.getRequestDispatcher("jsp/userreg.jsp");
 				dispatcher.forward(req, resp);
 			}
