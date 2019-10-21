@@ -17,9 +17,9 @@
 					<table class="headertable">
 						<tr>
 							<td class="logo"><img src="http://localhost:8080/StudentRegistration/images/SchoolLogo.png" height=29px;"></td>
-							<td><a href="../jsp/students.jsp">Enroll New Student</a></td>
-							<td><a href="../SubjectsServlet?action=getmarks">Update Marks</a></td>
-							<td><a href="../MarksServlet?action=LoadStudents">View Grades</a></td>
+							<td><a href="http://localhost:8080/StudentRegistration/jsp/students.jsp">Enroll New Student</a></td>
+							<td><a href="http://localhost:8080/StudentRegistration/SubjectsServlet?action=getmarks">Update Marks</a></td>
+							<td><a href="http://localhost:8080/StudentRegistration/MarksServlet?action=LoadStudents">View Grades</a></td>
 							<td><a href="http://localhost:8080/StudentRegistration/LoginServlet?action=Logout">Log Out</a></td>
 						</tr>
 					</table>
