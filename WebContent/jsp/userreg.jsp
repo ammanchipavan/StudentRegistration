@@ -25,6 +25,19 @@
 											
 												<table>
 												<tr>
+													<td class="formtd">First Name</td><td><input type="text" name="firstname" class="input" required></td>
+												</tr>
+												<tr>
+												<td class="formtd">Last Name</td><td><input type="text" name="lastname" class="input" required></td>
+												</tr>
+												<tr>
+												<td></td>
+												<td  class="formtd"><input type="checkbox" name="male" value="male" class="checkbox">Male</td>
+												</tr>
+												<tr>
+													<td class="formtd">Gender</td><td  class="formtd"><input type="checkbox" name="female" value="female" class="checkbox">Female</td>
+												</tr>
+												<tr>
 													<td class="formtd">User Name</td><td><input type="text" name="username" class="input" required></td>
 												</tr>
 												<tr>

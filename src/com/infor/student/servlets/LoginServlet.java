@@ -75,12 +75,25 @@ public class LoginServlet extends HttpServlet {
 				
 			}
 		} else if (action.equals("newuser")) {
+			String firstname = req.getParameter("firstname");
+			String lastname = req.getParameter("lastname");
+			String gender="";
+			if(req.getParameter("male")==null)
+			{
+				gender="female";
+			}else
+			{
+				gender="male";
+			}
 			int rows=0;
-			String query = "insert into users values(?,?)";
+			String query = "insert into users values(?,?,?,?,?)";
 			try (Connection connection = GetDbConnection2.getConnection();
 					PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 				preparedStatement.setString(1, username);
 				preparedStatement.setString(2, password);
+				preparedStatement.setString(3, firstname);
+				preparedStatement.setString(4, lastname);
+				preparedStatement.setString(5, gender);
 				dispatcher=req.getRequestDispatcher("jsp/userreg.jsp");
 				rows=preparedStatement.executeUpdate();
 				req.setAttribute("rowsinserted",rows);
