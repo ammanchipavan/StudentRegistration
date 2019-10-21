@@ -29,7 +29,7 @@
 			<div class="bodydivision">
 					<img src="images/schoolimage.png" width=100%;>
 						<div class="middledivision">
-								<p>View Marks</p>
+								<p>View Grades</p>
 						</div>
 				<div class="formdivision">
 						<center>
