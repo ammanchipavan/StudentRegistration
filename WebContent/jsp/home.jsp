@@ -1,25 +1,33 @@
 <html>
 <head>
 <title>home page</title>
-<link rel="stylesheet" type="text/css" href="css/home.css">
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/StudentRegistration/css/home.css">
 </head>
 <body>
+		<%
+		Object validation =session.getAttribute("validationFlag");
+		if(validation==null)
+		{
+			response.sendRedirect("jsp/login.jsp");
+		}
+		%>
 	<div class="headerdivision">
 			<table class="headertable">
 				<tr>
-					<td class="logo"><img src="images/SchoolLogo.png" height=29px;"></td>
-					<td><a href="jsp/students.jsp">Enroll New Student</a></td>
-					<td><a href="jsp/subjects.jsp">Opt For Subjects</a></td>
-					<td><a href="MarksServlet?action=LoadStudents">View Marks</a></td>
+					<td class="logo"><img src="http://localhost:8080/StudentRegistration/images/SchoolLogo.png" height=29px;"></td>
+					<td><a href="http://localhost:8080/StudentRegistration/jsp/students.jsp">Enroll New Student</a></td>
+					<td><a href="http://localhost:8080/StudentRegistration/SubjectsServlet?action=getmarks">Update Marks</a></td>
+					<td><a href="http://localhost:8080/StudentRegistration/MarksServlet?action=LoadStudents">View Grades</a></td>
+					<td><a href="http://localhost:8080/StudentRegistration/LoginServlet?action=Logout">Log Out</a></td>
 				</tr>
 			</table>
 	</div>
 	<div class="bodydivision">
-		<img src="images/schoolimage.png" width=100%;>
+		<img src="http://localhost:8080/StudentRegistration/images/schoolimage.png" width=100%;>
 		<div class="welcomemessage"><p>Welcome to Infor School</p>
 		</div>
 	</div>
-	<div class="footerdivision">
+		<div class="footerdivision">
 		<table class="footertable">
 			<tr>
 				<td  class="footertd">Copyright  2019 INFOR. All rights reserved.</td>
